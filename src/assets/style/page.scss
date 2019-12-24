@@ -1,0 +1,10 @@
+html,
+body {
+	font: 16px / 1.5 -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+    background-color: #00085c;
+}
+
+::selection {
+	color: white;
+	background: var(--global-theme-color, red);
+}

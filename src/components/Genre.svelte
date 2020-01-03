@@ -18,14 +18,14 @@ import { createEventDispatcher } from 'svelte';
 <style>
 
 .c-genreBox{
-    height: 40px;
+    height: auto;
     overflow: hidden;
-    border: solid 0.4px #f0f0f0;
+    border: solid 0.4px whitesmoke;
 }
 
 .c-genreTitle{
     font-size: 14px;
-    padding: 8px;
+    padding: 16px;
 }
 
 </style>

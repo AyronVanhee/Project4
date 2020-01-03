@@ -12,21 +12,38 @@
 
 </script>
 
-<style>
+<style type="scss" scoped>
+
+    /*@import "@/assets/style/components/home.scss";*/
+
 
 .c-movieImage{
-    width: auto;
-    height: 300px;
+    width: 120%; 
+   
+
 }
 
 .c-movieImageBox{
-    height: 280px;
     overflow: hidden;
+    height: 325px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .c-movieBox{
     box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 18%;
+    margin:1%;
+    transition: all 200ms;
+}
 
+.c-movieBox:hover{
+    transform:  scale(1.1);
+    cursor: pointer;
 }
 
 .c-movieTitle{
@@ -37,18 +54,56 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: royalblue;
 }
 
-@media only screen and (max-width: 700px) {
-  .c-movieImage{
-    width: auto;
-    height: 220px;
+
+
+@media screen and (min-width: 701px) and (max-width: 1200px) {
+
+
+  .c-movieBox{
+    width: 27%;
+    margin:3%;
+
+}
+
+.c-movieTitle{
+    height: 50px;
+  
 }
 
 .c-movieImageBox{
-    height: 200px;
-    overflow: hidden;
-}
+    height: 300px;
+
 }
 
+}
+
+@media only screen and (max-width: 700px) {
+
+ .c-movieBox{
+   
+    width: 44%;
+    margin:3%;
+
+}
+
+.c-movieTitle{
+    height: 55px;
+  
+}
+
+.c-movieImageBox{
+    height: 180px;
+
+}
+
+.c-movieImage{
+    width: 105%; 
+   
+
+}
+
+}
 </style>

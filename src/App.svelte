@@ -1,73 +1,94 @@
-<nav id="navbar">
-	<img class="c-logo" src="images/kinepolis.png" alt="kinepolisImage"/>
-	<div class="c-navItem">Item1</div>
-	<div class="c-navItem">Item2</div>
-</nav>
+<Router url="{url}">
+	<nav id="navbar">
+		<img class="c-logo" id="logo" src="images/logo.png" alt="logo"/>
+		<div class="c-navItem">
+		    <Link to="/">Home</Link>
 
+		</div>
+		<div class="c-navItem">    
+			<Link to="about">About</Link>
+		</div>
+	</nav>
+	
 <main>
-	<Home />
+	<div>
+		<Route path="about" component="{About}" />
+		<Route path="/" component="{Home}"/>
+  </div>
 </main>
 
-<footer>	
-	<div>footer tekst</div>
-</footer>
+<Footer/>
 
-<script>
-	export let name;
+</Router>
+
+
+<script>	
+	import Home from "./routes/Home.svelte";
+	import About from "./routes/About.svelte";
+	import { Router, Link, Route } from "svelte-routing";
+	import Footer from "./components/layout/Footer.svelte";
 	
-	import Home from "./views/Home.svelte";
+	export let url = "";
 
-	   window.onscroll = function() {scrollFunction()};
+
+	window.onscroll = function() {scrollFunction()};
 
     function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementById("navbar").style.height = "50px";
+		document.getElementById("navbar").style.height = "50px";
+
     } else {
-        document.getElementById("navbar").style.height = "65px";
+		document.getElementById("navbar").style.height = "75px";
+
     }
     }
 
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 	main {
 		text-align: center;
 		margin: 0 auto;
-		margin-top: 100px;
+		margin-top: 72px;
 	}
 
 	nav{
-		background-color: #212121;
+		background-color:white;
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		display: flex;
 		color: white;
-		height: 65px;
+		height: 75px;
 		align-items: center;
 		transition: all 200ms;
+		z-index: 1;
+
 	}
 
 	.c-logo{
-		height: 40px;
+		height: 50px;
 		width: auto;
-		margin: 0 16px;
+		margin: 0 16px 0 72px;
+
+
+
 	}
 
 	.c-navItem{
 		margin: 0 16px;
+		text-decoration: none;
 	}
 
-	footer{
-		background-color: #212121;
-		position: relative;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		height: 100px;
+@media only screen and (max-width: 700px) {
+	.c-logo{
+
+		margin-left: 16px;
+
+
+
 	}
-
-
+}
 </style>

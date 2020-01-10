@@ -5,7 +5,7 @@
 <script>
     export let genre;
 
-import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
 

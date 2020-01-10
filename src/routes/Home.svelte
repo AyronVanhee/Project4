@@ -6,27 +6,26 @@
     <img class="c-promoImage" src="./images/starwarspromo.png" alt="promo afbeelding"/>
 </div>
 
-<div class="o-container">
+<Container>
+
 
     <h1>{filterOption}</h1>
+        <div class="c-filterBar">
+            <button class="c-buttonNav c-buttonNav-first" on:click={allMovies}>Alle films</button>
+            <button class="c-buttonNav" on:click={moviesToday}>Vandaag</button>
 
+            <div class="c-dropdownGenre">
+                <button class="c-buttonNav">Genre</button>
+                <div class="c-dropdownGenre-content">
+                    {#each genres as genre}
+                        <Genre on:getGenre={moviesGenre} genre={genre}/>
+                    {/each}
+                </div>
 
-
-    <div class="c-filterBar">
-        <button class="c-buttonNav c-buttonNav-first" on:click={allMovies}>Alle films</button>
-        <button class="c-buttonNav" on:click={moviesToday}>Vandaag</button>
-
-        <div class="c-dropdownGenre">
-            <button class="c-buttonNav">Genre</button>
-            <div class="c-dropdownGenre-content">
-                 {#each genres as genre}
-                    <Genre on:getGenre={moviesGenre} genre={genre}/>
-                {/each}
             </div>
 
         </div>
 
-    </div>
 
     <div class="c-movieGrid">
         {#each movies as movie}
@@ -35,12 +34,13 @@
 
     </div>
 
-</div>
+</Container>
 
 <script>
     import Movie from "../components/Movie.svelte";
     import Genre from "../components/Genre.svelte";
 
+    import Container from "../components/layout/Container.svelte";
 
     import { onMount } from 'svelte';
 
@@ -49,16 +49,12 @@
     let filterOption= "Alle films";
 
 	onMount(async () => {        
-	   movies = await fetch(`https://localhost:44346/api/Movie`);
-       movies = await movies.json();
-       console.log(movies);
-       filterOption = "Alle films"
+        movies = await fetch(`https://localhost:44346/api/Movie`);
+        movies = await movies.json();
+        filterOption = "Alle films"
 
         genres= await fetch('https://localhost:44346/api/Movie/genres');
         genres = await genres.json();
-        console.log(genres);
-
-       
 
     });
     
@@ -87,144 +83,10 @@
 
 </script>
 
-<style lang="scss">
-
-@import '../assets/style/components/home.scss';
-/*
-.o-container{
-    max-width: 1400px;
-    margin: 0 auto;
-    padding:16px;
-
+<style type="scss">
+h1{
+    text-align: center;
 }
 
-.c-movieGrid{
 
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    align-items: center;
-    align-content: center;
-}
-
-.c-filterBar{
-    display: flex;
-    margin: 16px 0;
-}
-
-.c-dropdownGenre {
-}
-
-.c-dropdownGenre-content {
-  display: none;
-  position: absolute;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  cursor: pointer;
-  background-color: royalblue;
-}
-
-.c-dropdownGenre:hover .c-dropdownGenre-content {display: block;}
-
-
-
-.c-buttonNav{
-    background-color: #cf1111;
-    color:white;
-    padding:8px 16px;
-    margin: 4px 8px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-}
-
-.c-buttonNav-first{
-    margin: 4px 8px 4px 0;
-}
-
-.c-promoBox{
-    margin:0;
-    padding:0;
-    overflow: hidden;
-    align-items: center;
-    position: relative;
-    display: flex;
-    height: 450px;
-    
-
-}
-
-.c-promoImage{
-    justify-content: center;
-    width: 100%;
-
-}
-
-.c-promoTitle{
-    font-size: 5rem;
-    font-weight: bold;
-    margin-bottom: 48px;
-}
-
-.c-promoText{
-    font-size: 2rem;
-
-}
-
-.c-promoTextBox{
-    margin: 0 0 0 200px; 
-    position: absolute;
-    width: 550px;
-    text-align: start;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
-}
-@media screen and (min-width: 701px) and (max-width: 1200px) {
-.c-promoBox{
-    height: 350px;
-
-}
-.c-promoTitle{
-    font-size: 3rem;
-    margin-bottom: 48px;
-}
-
-.c-promoText{
-    font-size: 1.5rem;
-
-}
-
-.c-promoTextBox{
-    margin: 0 32px 32px 32px ; 
-    width: auto;
-
-}
-}
-
-@media only screen and (max-width: 700px) {
-  .c-promoBox{
-    height: 200px;
-
-}
-.c-promoTitle{
-    font-size: 2rem;
-    margin-bottom: 16px;
-}
-
-.c-promoText{
-    font-size: 1rem;
-
-}
-
-.c-promoTextBox{
-    margin: 0 32px 32px 32px ; 
-    width: auto;
-
-}
-
-.c-promoImage{
-    width: 110%;
-
-}
-}
-*/
 </style>

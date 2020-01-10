@@ -4,7 +4,7 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "sirv public"
+    "start": "sirv public --single"
   },
   "devDependencies": {
     "@kazzkiq/svelte-preprocess-scss": "^0.1.3",
@@ -19,6 +19,9 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "axios": "^0.19.1",
+    "page": "^1.11.5",
+    "query-string": "^6.9.0",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.0",
     "svero": "^1.0.0"

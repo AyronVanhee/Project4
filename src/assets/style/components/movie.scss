@@ -1,0 +1,91 @@
+@keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .c-movieImage{
+      width: 120%; 
+      animation: 1s ease-out 0s 1 appear;
+  
+  
+  }
+  
+  .c-movieImageBox{
+      overflow: hidden;
+      height: 325px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+        cursor: pointer;
+  }
+  
+  .c-movieBox{
+      box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+      background-color: white;
+      transition: all 200ms;
+      min-width: 100px;
+  }
+  
+  .c-movieBox:hover{
+      transform:  scale(1.1);
+  }
+  
+  .c-movieTitle{
+      padding: 8px;
+      font-weight: bold;
+      height: 40px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: royalblue;
+      text-align: center;
+  
+  }
+  
+  .c-movieItem{
+  
+      height: auto!important;
+   
+  }
+  
+  
+  @media screen and (min-width: 701px) and (max-width: 1200px) {
+  
+  .c-movieTitle{
+      height: 50px;
+    
+  }
+  
+  
+  
+  }
+  
+  @media screen and (min-width: 501px) and (max-width: 700px) {
+  
+  
+  .c-movieTitle{
+      height: 55px;
+    
+  }
+  
+  
+  .c-movieImage{
+      width: 105%; 
+     
+  }
+  }
+  
+  @media only screen and (max-width: 500px) {
+  
+  .c-movieImageBox{
+  
+      height: 200px;
+  
+  }
+  
+  }

@@ -1,5 +1,6 @@
 import App from './App.svelte';
 
+
 //de css files worden hier ingezet zodat er een live reload wordt uitgevoerd
 //eerst werd er gewerkt met een screen.scss waarin dat al deze files werden gezet,
 //maar er werd op het einde nog eens een normalize css geplaats die bepaalde elementen veranderde
@@ -8,7 +9,7 @@ import App from './App.svelte';
 import './assets/style/settings/global.scss';
 
 // Generic 
-import './assets/style/generic/normalize.scss';
+//import './assets/style/generic/normalize.scss';
 
 // Elements
 import './assets/style/elements/page.scss';
@@ -17,6 +18,8 @@ import './assets/style/elements/page.scss';
 
 // Components
 import './assets/style/components/home.scss';
+import './assets/style/components/movie.scss';
+
 
 
 const app = new App({

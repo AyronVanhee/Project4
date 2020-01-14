@@ -18,13 +18,19 @@
 <style>
 
 .c-genreBox{
+    width: 250px;
     height: auto;
     overflow: hidden;
-    border: solid 0.4px whitesmoke;
+    margin: 8px 0;
+    cursor: pointer;
+}
+
+.c-genreBox:hover{
+    background-color: white;
+    color: #4169e1;
 }
 
 .c-genreTitle{
-    font-size: 14px;
     padding: 16px;
 }
 

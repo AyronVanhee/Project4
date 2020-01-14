@@ -19,6 +19,8 @@ import './assets/style/elements/page.scss';
 // Components
 import './assets/style/components/home.scss';
 import './assets/style/components/movie.scss';
+import './assets/style/components/button.scss';
+
 
 
 

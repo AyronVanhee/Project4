@@ -1,7 +1,10 @@
 <Container>
 
+<div class="c-logoBox">
+    <img class="c-logoImage" src="./images/favicon.png" alt="promo afbeelding"/>
+</div>
+
 <div class="c-loginBox">
-    <h1>Login</h1>
     <div class="c-loginInformation">
 
         <label for="Email" class="c-label">Email</label>
@@ -14,7 +17,7 @@
         {/if}
 
 
-        <button on:click={Login} type="submit" class="c-homeButton">Login</button>
+        <button on:click={Login} type="submit" class="c-loginButton">Login</button>
 
         <a href="/registreer">Nog geen account? Registreer hier</a>
     </div>
@@ -29,12 +32,16 @@
 
     let error;
 
+    window.scrollTo({
+            top: 0,
+            left: 0,
+        });
+
     function Login(){
         localStorage.removeItem("JwtToken")
 
         let email = document.getElementById("Email").value;
         let password = document.getElementById("Password").value;
-        console.log("email " + email + " wachtwoord " + password);
 
         if(email != null && password != null){
             const authentication ={
@@ -43,55 +50,21 @@
             };
             return axios.post('https://localhost:44346/api/Auth/token', authentication).then(res => {
 
-                    const profile = res.data
-                    const jwtToken = res.data.token
-                    console.log(res)
-
-                    if(profile.error == undefined){
+                    if(res.data.error == undefined){
                         error= undefined;
-                        window.localStorage.setItem('JwtToken', jwtToken);
+                        window.localStorage.setItem('JwtToken', res.data.token);
                         window.location.href = "/home";
                     }else{
                         error="Email of wachtwoord is verkeerd"
                     }
 
-                    })
-                    }
+            })
+        }
     }
+    
 </script>
 
 <style lang="scss">
-
-h1{
-    text-align: center;
-    background-color: #4169e1;
-    width: 500px;
-    color: white;
-    padding: 16px 0;
-    margin: 0;
-    border-radius: 4px 4px 0 0;
-}
-
-
-.c-homeButton{
-    font-weight: bold;  
-    border: 1px  solid #4169e1;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 200ms;
-    margin: 8px 0;
-    background-color: #4169e1;
-    color: white;
-    display: block;
-    width: 100%;
-
-}
-
-.c-homeButton:hover{
-    color: #4169e1;
-    background-color: transparent;
-}
 
 .c-loginBox{
     border: 1px solid white;
@@ -129,6 +102,48 @@ h1{
 
 }
 
+.c-logoBox{
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+    border-radius: 16px;
+    margin-top: 32px;
+}
+
+.c-logoImage{
+    width: 100px;
+    height: auto;
+    margin:16px;
+}
+
+@media only screen and (max-width: 550px) {
+    .c-loginBox{
+        margin-top: 0;
+        width: 250px;
+
+}
+
+.c-logoBox{
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.c-logoImage{
+    width: 50px;
+    height: auto;
+    margin:16px;
+}
+}
 
 </style>
 

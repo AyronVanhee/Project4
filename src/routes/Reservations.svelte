@@ -1,7 +1,6 @@
 <Container>
 
     <h1>Tickets</h1>
-
     
     {#if reservations.length}
         <div class="c-movieGrid">
@@ -13,7 +12,6 @@
         <h2>Je hebt nog geen tickets gekocht.</h2>
 
     {/if}
-
 
 </Container>
 
@@ -39,7 +37,6 @@
         axios.get('https://localhost:44346/api/User/reservations' )
         .then(res => {
             reservations = res.data;
-            console.log(reservations)
 
          });
     });
@@ -49,40 +46,6 @@
 
 h1{
     text-align: center;
-}
-
-
-.c-homeButton{
-    font-weight: bold;  
-    border: 1px  solid #4169e1;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 200ms;
-    margin: 4px;
-    background-color: #4169e1;
-    color: white;
-    display: block;
-
-}
-
-.c-homeButton:hover{
-    color: #4169e1;
-    background-color: transparent;
-}
-
-.c-loginBox{
-    margin: 0 auto;
-    width: 400px;
-    background-color: white;
-    color: #4169e1;
-    padding: 16px;
-
-}
-
-.c-error{
-    color: red;
-    margin:16px 0;
 }
 
 

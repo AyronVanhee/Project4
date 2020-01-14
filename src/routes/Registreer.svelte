@@ -1,7 +1,10 @@
 <Container>
 
+<div class="c-logoBox">
+    <img class="c-logoImage" src="./images/favicon.png" alt="promo afbeelding"/>
+</div>
+
 <div class="c-loginBox">
-    <h1>Registreer</h1>
     <div class="c-loginInformation">
 
         <label for="Email" class="c-label">Email</label>
@@ -14,7 +17,7 @@
         {/if}
 
 
-        <button on:click={Registreer} type="submit" class="c-homeButton">Registreer</button>
+        <button on:click={Registreer} type="submit" class="c-loginButton">Registreer</button>
 
         <a href="/login">Al een account? Log hier in</a>
     </div>
@@ -29,10 +32,15 @@
 
     let error;
 
+    window.scrollTo({
+            top: 0,
+            left: 0,
+        });
+
     function Registreer(){
         localStorage.removeItem("JwtToken")
 
-        let email = document.getElementById("Email").value;
+        let email = document.getElementById("Email").value.trim();
         let password = document.getElementById("Password").value;
         console.log("email " + email + " wachtwoord " + password);
 
@@ -97,36 +105,7 @@
 
 <style lang="scss">
 
-h1{
-    text-align: center;
-    background-color: #4169e1;
-    width: 500px;
-    color: white;
-    padding: 16px 0;
-    margin: 0;
-    border-radius: 4px 4px 0 0;
-}
 
-
-.c-homeButton{
-    font-weight: bold;  
-    border: 1px  solid #4169e1;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 200ms;
-    margin: 8px 0;
-    background-color: #4169e1;
-    color: white;
-    display: block;
-    width: 100%;
-
-}
-
-.c-homeButton:hover{
-    color: #4169e1;
-    background-color: transparent;
-}
 
 .c-loginBox{
     border: 1px solid white;
@@ -164,6 +143,48 @@ h1{
 
 }
 
+.c-logoBox{
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+    border-radius: 16px;
+    margin-top: 32px;
+}
+
+.c-logoImage{
+    width: 100px;
+    height: auto;
+    margin:16px;
+}
+
+@media only screen and (max-width: 550px) {
+    .c-loginBox{
+        margin-top: 0;
+        width: 250px;
+
+}
+
+.c-logoBox{
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.c-logoImage{
+    width: 50px;
+    height: auto;
+    margin:16px;
+}
+}
 
 </style>
 

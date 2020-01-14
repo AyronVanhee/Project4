@@ -12,6 +12,47 @@ export default{
 
     logout(){
         localStorage.removeItem('JwtToken');
+        window.location.href = "/home";
+
+    },
+
+    checkJwtToken(){
+        let token = window.localStorage.getItem("JwtToken");
+
+        if(token != undefined){
+            token = this.parseJwt(token);
+           
+            if (Date.now() >= token.exp * 1000) {
+                window.localStorage.removeItem('JwtToken')
+                return undefined;
+
+            }else{
+                return token
+                
+            }
+        }else{
+            return undefined;
+        }
+    },
+    
+    checkIfAdmin(){
+        let token = window.localStorage.getItem("JwtToken");
+
+        if(token != undefined){
+      
+            token = this.parseJwt(token);
+            console.log(" de rollen " +token.Rollen)
+
+                if(token.Rollen == "Admin"){
+                    return true;
+                    
+                }else{
+                    return false;
+                }
+            
+        }else{
+            return false;
+        }
 
     }
 }

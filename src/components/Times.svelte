@@ -1,5 +1,9 @@
-<button class="c-homeButton" on:click={sendTime}>{hours}:{minutes}</button>
-
+<!-- <button class="c-homeButton" on:click={sendTime}>{hours}:{minutes}</button> -->
+<label class="container">
+    <input name="time" type="radio" class="c-homeButton" on:click={sendTime}/>
+    <span class="checkmarkText"> {hours}:{minutes} </span>
+    <span class="checkmark"></span>
+</label>
 <script>
     export let movieRoom;
 
@@ -13,7 +17,6 @@
 			movieRoom: movieRoom.movieRoomID
 		});
 	}
-
 
     let hours;
     let minutes;
@@ -36,23 +39,5 @@
 </script>
 
 <style>
-
-.c-homeButton{
-    font-weight: bold;  
-    border: 1px  solid white;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 200ms;
-    margin: 4px;
-    background-color: white;
-    color: #4169e1;
-
-}
-
-.c-homeButton:hover{
-    color: white;
-    background-color: transparent;
-}
 
 </style>

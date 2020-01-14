@@ -11,7 +11,10 @@
 
     import Container from "../components/layout/Container.svelte";
 
-
+    window.scrollTo({
+                top: 0,
+                left: 0,
+            });
 </script>
 
 <style lang="scss">

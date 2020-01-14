@@ -16,10 +16,14 @@
             <hr>
     
             {#if dates.length}
-            <h2>Dagen</h2>
+            <h3>Dagen</h3>
             <div class="c-datesGrid" style="--columns:{dates.length}">
                 {#each dates as date}
-                    <button class="c-homeButton" on:click={datePicked(date)}>{new Date(date).getDate()} {months[new Date(date).getMonth()]}</button>
+                <label class="container">
+                    <input name="date" type="radio" class="c-homeButton" on:click={datePicked(date)}/>
+                    <span class="checkmarkText"> {new Date(date).getDate()} {months[new Date(date).getMonth()]} </span>
+                    <span class="checkmark"></span>
+                </label>
                 {/each}
             </div>
             {:else}
@@ -30,7 +34,7 @@
          
             {#if rooms.length}
                 {#each rooms as room}
-                            <h2>Zaal {room.roomID}</h2>
+                            <h3>Zaal {room.roomID}</h3>
                             <div class="c-datesGrid" style="--columns:{room.movieRoom.length}">
                                 {#each room.movieRoom as movieRoom}
                                     <Times on:getTime={getSeats} movieRoom={movieRoom}/>
@@ -53,21 +57,17 @@
         </div>
     {/if}
 
-    {#if seat!= undefined}
-        <button class="c-homeButton" on:click={OrderSeat}>Plaats reserveren</button>
-    {/if}
 
-    {#if movies.length}
-    <h2>Andere films van hetzelfde genre:</h2>
-    <div class="c-movieGrid">
-        {#each movies as movie}
-                <Movie movie={movie}/>
-        {/each}
-    </div>
-    {/if}
+        {#if seat!= undefined}
+            {#if token != undefined}
+                <button class="c-homeButton c-orderButton" on:click={OrderSeat}>Plaats reserveren</button>
+            {:else}
+                <div>Je moet ingelogd zijn als je een ticket wilt kopen <button class="c-homeButton" onclick="window.location.href = '/login';">Log hier in </button></div>
+            {/if}
+        {/if}
+
 
 </Container>
-
 
 
 <script>
@@ -85,7 +85,6 @@
 
 
     let movie=[];
-    let movies=[];
     let rooms=[];
     let allSeats=[];
     let occupiedSeats=[];
@@ -99,39 +98,29 @@
 
     let token;
 
+    token = JwtTokenHelper.checkJwtToken();
+
+
     onMount(async () => {        
+        window.scrollTo({
+            top: 0,
+            left: 0,
+        });
         movie = await fetch(`https://localhost:44346/api/Movie/${id}`);
         movie = await movie.json();
 
 	    dates = await fetch(`https://localhost:44346/api/Movie/${id}/Dates`);
         dates = await dates.json();
-
-        movies = await fetch(`https://localhost:44346/api/Movie/genres/${movie.genreName}`)
-        movies = await movies.json();
-
-        movies = movies.slice(0,6);
-
-        movies.forEach(removeSeenMovie);
-
-        function removeSeenMovie(item, index){
-            console.log("de each " + item.name + index)
-            if(item.name ==movie.name){
-                console.log("verwijderen")
-               
-                movies.splice(index, 1)
-            }
-            
-        }
           
         });
     
     
     async function datePicked(date){
-        console.log("de rooms");
         rooms = await fetch(`https://localhost:44346/api/Movie/${id}/${date}`);
         rooms= await rooms.json();
         allSeats=[];
         date=date;
+        seat= undefined;
     }
 
     async function getSeats(event){
@@ -147,11 +136,11 @@
         allSeats= await allSeats.json();
 
         movieRoom = event.detail.movieRoom;
+        seat= undefined;
 
     }
 
     function ChooseSeat(event){
-        console.log("klikt op seat" + event.detail.seatID)
         seat= event.detail.seatID;
 
     }
@@ -160,15 +149,11 @@
         console.log("de order wordt geplaats")
 	    token = window.localStorage.getItem("JwtToken");
         user = JwtTokenHelper.parseJwt(token);
-        console.log(token)
-        console.log(user);
-        console.log("movieroom " + movieRoom + " seat " + seat+ " user " + user.UserId)
         
         const order = {
             movieRoomID: movieRoom,
             seatID: seat,
             UserID: user.UserId
-
 
         }
 
@@ -194,22 +179,15 @@
 
 .c-movieInformationGrid{
     display: grid;
-    grid-template-columns: 30% auto;
+    grid-template-columns: 25% auto;
     grid-gap: 40px;
+    margin-bottom: 32px;
 }
 
 
 
 .c-description{
     font-size: 18px;
-}
-
-.c-movieImage{
-    width: 100%;
-    animation: 1s ease-out 0s 1 appear;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
-
-
 }
 
 
@@ -226,7 +204,17 @@
   }
 }
 
+@keyframes appear {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
 .c-datesGrid{
+    animation: 1s ease-out 0s 1 appear;
     width: 100%;
     display: grid;
     grid-gap: 20px;
@@ -234,44 +222,38 @@
 
 }
 
-
-.c-homeButton{
-    font-weight: bold;  
-    border: 1px  solid white;
-    border-radius: 4px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 200ms;
-    margin: 4px;
-    background-color: white;
-    color: #4169e1;
-
-}
-
-.c-homeButton:hover{
-    color: white;
-    background-color: transparent;
-}
-
-.c-homeButton:focus{
-    color: white;
-    background-color: transparent;
-}
 
 .c-seatsGrid{
+    animation: 1s ease-out 0s 1 appear;
     width: 100%;
     display: grid;
     grid-gap: 20px;
     grid-template-columns:repeat(var(--columns), calc(100% / var(--columns) - ((var(--columns) - 1) * 20px  / var(--columns ) )));
+    margin-bottom: 16px;
+
 }
 
-.c-seat{
-    background-color: transparent;
-    border: 1px solid white;
-    border-radius: 16px;
+.c-movieImage{
+    width:100%;
+
 }
 
-@media only screen and (max-width: 700px) {
+.c-orderButton{
+    width:45%;
+    margin: 0 auto;
+    margin-right:0;
+    display:flex;
+    margin-bottom: 16px;
+
+}
+
+
+@media only screen and (max-width: 900px) {
+
+h1{
+    text-align: center;
+}
+    
 .c-movieInformationGrid{
     grid-template-columns: auto;
     grid-gap: 20px;
@@ -284,5 +266,13 @@
 
 }
 
+.c-movieImage{
+    width:75%;
+    margin: 0 auto;
+    display: flex;
 }
+
+}
+
+
 </style>

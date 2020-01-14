@@ -3,7 +3,7 @@
         <div class="c-promoTitle">Klaar voor de beste films?</div>
         <div class="c-promoText">Bestel nu je tickets en geniet van een luxe ervaring in onze cinema</div>
     </div>
-    <img class="c-promoImage" src="./images/starwarspromo.png" alt="promo afbeelding"/>
+    <img class="c-promoImage" src="./images/starwarspromo2.png" alt="promo afbeelding"/>
 </div>
 
 <Container>
@@ -11,11 +11,11 @@
 
     <h1>{filterOption}</h1>
         <div class="c-filterBar">
-            <button class="c-buttonNav c-buttonNav-first" on:click={allMovies}>Alle films</button>
+            <button class="c-buttonNav" on:click={allMovies}>Alle films</button>
             <button class="c-buttonNav" on:click={moviesToday}>Vandaag</button>
 
             <div class="c-dropdownGenre">
-                <button class="c-buttonNav">Genre</button>
+                <div class="c-buttonNav">Genre</div>
                 <div class="c-dropdownGenre-content">
                     {#each genres as genre}
                         <Genre on:getGenre={moviesGenre} genre={genre}/>
@@ -48,7 +48,13 @@
     let genres =[];
     let filterOption= "Alle films";
 
-	onMount(async () => {        
+	onMount(async () => {       
+        
+        window.scrollTo({
+            top: 0,
+            left: 0,
+        });
+        
         movies = await fetch(`https://localhost:44346/api/Movie`);
         movies = await movies.json();
         filterOption = "Alle films"
@@ -84,6 +90,7 @@
 </script>
 
 <style type="scss">
+
 h1{
     text-align: center;
 }

@@ -15,6 +15,7 @@ export default {
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
+	
 	plugins: [
 		svelte({
 			// enable run-time checks when not in production
@@ -48,7 +49,8 @@ export default {
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
 		production && terser(),
-		scss({output:'public/build/sass.css'})
+		scss({output:'public/build/sass.css'}),
+		
 	],
 	watch: {
 		clearScreen: false

@@ -1,5 +1,5 @@
 <div class="c-movieBox">
-		    <a href="/movie/{movie.movieID}">
+		    <a class="js-movie" href="/movie/{movie.movieID}">
         <div class="c-movieImageBox">
             <img class="c-movieImage" src={movie.image} alt="movieImage"/>
         </div>
@@ -10,7 +10,7 @@
 
 
 <script>
-    export let movie;
+    export let movie;  
 
 </script>
 

@@ -1,11 +1,12 @@
+<span id="app">
 <Navbar/>
 
-<main>
+<main id="main">
   <svelte:component this={component}  {...props} />
 </main>
 
 <Footer/>
-
+</span>
 
 <script>	
 	import Home from "./routes/Home.svelte";
@@ -40,9 +41,12 @@
     function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		document.getElementById("navbar").style.height = "50px";
+		document.getElementById("menu").style.marginTop = "105px";
 
     } else {
 		document.getElementById("navbar").style.height = "75px";
+		document.getElementById("menu").style.marginTop = "115px";
+
     }
 	}
 

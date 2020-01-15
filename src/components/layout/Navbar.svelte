@@ -1,45 +1,72 @@
 <nav id="navbar">
 
-<div class="c-hamburger" on:click={openMenu}>hamburger</div>
+		{#if screenWidht>700}
+			<img class="c-logo" id="logo" src="images/logo.png" alt="logo"/>
+
+			<div class="c-navItem">
+				<a href="/home" >Home</a>
+
+			</div>
+			<div class="c-navItem">    
+				<a href="/about">About</a>
+			</div>
+		
+			{#if token == undefined}
+				<div class="c-navItem c-login">
+					<a href="/login">Login</a>
+				</div>
+			{:else}
+				{#if admin == true}
+					<div class="c-navItem c-logout">
+						<a href="/admin">Admin</a>
+					</div>
+				{/if}
+				
+				<div class="c-navItem c-login">
+					<a href="/reservations">{token.sub}</a>
+				</div>
+				<div class="c-navItem c-logout">
+					<div on:click={Logout}>Logout</div>
+				</div>	
+			{/if}
+		{:else}
+		<img id="imageMenu" class="c-hamburger" on:click={openMenu} src="./images/hamburgerIcon.svg" alt="hamburger Icon"/>
+		<div id="menu" class="c-menu">
+			<div class="c-menuItem" on:click={openMenu} >
+				<a href="/home" >Home</a>
+
+			</div>
+			<div class="c-menuItem" on:click={openMenu}>    
+				<a href="/about">About</a>
+			</div>
+			{#if token == undefined}
+				<div class="c-menuItem" on:click={openMenu}>
+					<a href="/login">Login</a>
+				</div>
+			{:else}
+				{#if admin == true}
+					<div class="c-menuItem" on:click={openMenu}>
+						<a href="/admin">Admin</a>
+					</div>
+				{/if}
+						
+				<div class="c-menuItem" on:click={openMenu}>
+					<a href="/reservations">{token.sub}</a>
+				</div>
+				<div class="c-menuItem" on:click={openMenu}>
+					<div on:click={Logout}>Logout</div>
+				</div>	
+			{/if}
+
+		</div>
+		
 		<img class="c-logo" id="logo" src="images/logo.png" alt="logo"/>
 
-		<div class="c-navItem">
-		    <a href="/home" >Home</a>
-
-		</div>
-		<div class="c-navItem">    
-		    <a href="/about">About</a>
-		</div>
-	
-		{#if token == undefined}
-			<div class="c-navItem c-login">
-				<a href="/login">Login</a>
-			</div>
-		{:else}
-			{#if admin == true}
-				<div class="c-navItem c-logout">
-					<a href="/admin">Admin</a>
-				</div>
-			{/if}
-			
-			<div class="c-navItem c-login">
-				<a href="/reservations">{token.sub}</a>
-			</div>
-			<div class="c-navItem c-logout">
-				<div on:click={Logout}>Logout</div>
-			</div>	
 		{/if}
 		
-	</nav>
-	<div id="menu" class="c-menu">
-		<div class="">
-		    <a href="/home" >Home</a>
+</nav>
 
-		</div>
-		<div class="">    
-		    <a href="/about">About</a>
-		</div>
-	</div>
+
 
 <script>
 
@@ -50,35 +77,39 @@
 
 	let token;
 	let admin=false;
-	console.log("tekst")
+	let screenWidht= screen.width;
+
 
 	onMount(async () => {        
         //kijken naar een jwttoken
 		token = JwtTokenHelper.checkJwtToken();
 
 		admin = JwtTokenHelper.checkIfAdmin();
-		console.log("admin?" +  admin)
           
         });
 
         
-    
+    window.addEventListener('resize', function() {
+		screenWidht = screen.width;
+	});
 	
 	function Logout(){
 		JwtTokenHelper.logout();
 	}
 
 	function openMenu(){
-		console.log("erop geklikt")
 
 		var menu = document.getElementById('menu');
-		console.log(menu)
+
 		if(menu.style.display!="block"){
 			menu.style.display="block";
+			document.getElementById("imageMenu").setAttribute("src","./images/crossIcon.svg");
 
 		}else{
 			menu.style.display="none";
+			document.getElementById("imageMenu").setAttribute("src","./images/hamburgerIcon.svg");
 		}
+
 	}
 
 
@@ -112,7 +143,7 @@
 	.c-navItem{
 		margin: 0 16px;
 		text-decoration: none;
-		color:royalblue;
+		color:#4169e1;
 	}
 
 	.c-login{
@@ -161,17 +192,23 @@
 
 	.c-hamburger{
 		display: block;
-		color: pink;
 	}
 
 	.c-menu{
-		height: 100%;
-		background-color: pink;
+		height:auto;
+		background-color: whitesmoke;
 		position: absolute;
-		width: 50%;
+		width: 100%;
 		transition: all 200ms;
-		z-index: 1;
+		z-index: 3;	
+		color:#2d51bd;
+		margin-top:115px;
+		left:0;
 
+	}
+
+	.c-menuItem{
+		padding:8px;
 	}
 }
 </style>

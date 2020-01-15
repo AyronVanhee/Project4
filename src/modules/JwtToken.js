@@ -41,7 +41,6 @@ export default{
         if(token != undefined){
       
             token = this.parseJwt(token);
-            console.log(" de rollen " +token.Rollen)
 
                 if(token.Rollen == "Admin"){
                     return true;

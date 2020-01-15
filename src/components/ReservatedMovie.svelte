@@ -6,9 +6,7 @@
         <div class="c-movieTitle">{reservation.movieName}</div>
         <div class="c-movieTitle c-movieItem">Zaal: {reservation.room}</div>
         <div class="c-movieTitle c-movieItem">Zetel nummer: {reservation.seatNumber}</div>
-        <div class="c-movieTitle c-movieItem">{hours}:{minutes} {new Date(reservation.date).getDate()}-{new Date(reservation.date).getMonth()}-{new Date(reservation.date).getFullYear()} </div>
-
-        <div>iets</div>
+        <div class="c-movieTitle c-movieItem">{hours}:{minutes} {new Date(reservation.date).getDate()}-{months[new Date(reservation.date).getMonth()]}-{new Date(reservation.date).getFullYear()} </div>
 
 </div>
 
@@ -21,6 +19,8 @@
     let movie=[];
     let hours;
     let minutes;
+    let months= ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"];
+
 
     onMount(async () => {        
             movie = await fetch(`https://localhost:44346/api/Movie/${reservation.movieId}`);

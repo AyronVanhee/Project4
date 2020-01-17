@@ -3,12 +3,12 @@
         <div>
             <div class="c-title">Openingsuren</div>
                 <div>Maandag ................. 9:00 - 22:00</div>
-                <div>Dinsdag .................... 9:00 - 22:00</div>
-                <div>Woensdag ................ 9:00 - 22:00</div>
-                <div>Donderdag ............... 9:00 - 22:00</div>
-                <div>Vrijdag ................. 9:00 - 22:00</div>
-                <div>Zaterdag ................ 9:00 - 22:00</div>
-                <div>Zondag .................. Gesloten</div>
+                <div>Dinsdag ..................... 9:00 - 22:00</div>
+                <div>Woensdag ............. 9:00 - 22:00</div>
+                <div>Donderdag ............. 9:00 - 22:00</div>
+                <div>Vrijdag ........................ 9:00 - 22:00</div>
+                <div>Zaterdag .................. 9:00 - 22:00</div>
+                <div>Zondag ..................... Gesloten</div>
 
         </div>
 

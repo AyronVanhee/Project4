@@ -35,7 +35,6 @@
             if(allSeat.seatID == availableSeats[i].seatID){
                 var elem = document.getElementById(allSeat.seatNumber);
                 available =true;
-                        //elem.style.backgroundColor="pink";
                     }
             }
 

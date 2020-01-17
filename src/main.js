@@ -20,8 +20,8 @@ import './assets/style/elements/page.scss';
 import './assets/style/components/home.scss';
 import './assets/style/components/movie.scss';
 import './assets/style/components/button.scss';
-
-
+import './assets/style/components/login.scss';
+import './assets/style/components/scrollbar.scss';
 
 
 const app = new App({

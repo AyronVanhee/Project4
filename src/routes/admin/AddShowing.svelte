@@ -93,4 +93,15 @@
 .c-homeButton{
     margin: 16px 0;
 }
+
+select{
+    height: 30px;
+    border:none;
+    background-color: white;
+    width: 250px;
+}
+
+h2{
+    margin-top:16px;
+}
 </style>

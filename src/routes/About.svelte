@@ -7,6 +7,7 @@
         <li>rollup-plugin-scss</li>
         <li>page.js</li>
         <li>Axios</li>
+        <li>idb-keyval</li>
     </ul>
 
     <h2>Rollup-Plugin-Scss</h2>
@@ -26,6 +27,9 @@
 
     <h2>Axios</h2>
     <div>Dit wordt gebruikt voor de apicalls.</div>
+
+    <h2>Idb-keyval</h2>
+    <div>Hiermee kan je eenvoudiger gebruik maken van indexeddb.</div>
 </Container>
 
 <script>

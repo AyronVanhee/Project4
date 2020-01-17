@@ -34,6 +34,12 @@
 
     </div>
 
+    <div class="c-notification js-notification" id="notification">
+        <div class="js-addText">Sla de films op zodat je deze ook offline kunt raadplegen</div>
+        <img id="notificationIcon" class="c-add js-addImage" src="./images/plus.svg" alt="icon"/>
+    </div>
+
+
 </Container>
 
 <script>
@@ -43,9 +49,11 @@
     import Container from "../components/layout/Container.svelte";
 
     import { onMount } from 'svelte';
+    import { get, set } from 'idb-keyval';
 
-    let movies =[];
+    let movies=[];
     let genres =[];
+    let indexedMovies=[];
     let filterOption= "Alle films";
 
 	onMount(async () => {       
@@ -54,15 +62,98 @@
             top: 0,
             left: 0,
         });
+
+        var notification = document.getElementById("notification")
+    
+        try{      
+            filterOption = "Alle films"
+            movies = await fetch(`https://localhost:44346/api/Movie`);
+            movies = await movies.json();
+
+            genres= await fetch('https://localhost:44346/api/Movie/genres');
+            genres = await genres.json();
+
+            get('movies')
+            .then(arr => {
+            
+                var icon = document.getElementById("notificationIcon");
+                notification.style.display="flex";
+
+                if(arr == undefined){
+                    console.log("er zit niets in de offline database")
+                    if(movies.length){
+
+                        icon.addEventListener('click', function(){
+                            notification.style.display="none";
+                            set('movies', movies)
+                        })
+                    }
+                if(movies == arr){
+                    console.log("zelfde gegevens")
+                }        
+               
+                }else{
+
+                    var gelijkeArrays = true;
+                    if(arr.length !== movies.length){
+                        gelijkeArrays = false;
+                    }
+                    for(var i = arr.length; i--;) {
+                        if(JSON.stringify(arr[i]) !== JSON.stringify(movies[i])){
+                            gelijkeArrays = false;
+                            break;
+                            }
+                    }
+                   
+                   if(gelijkeArrays){
+                        notification.style.display="none";
+
+                   }else{
+                        document.querySelector(".js-addText").innerHTML = "De offline database is niet up-to-date, wil je deze updaten?";
+                        icon.addEventListener('click', function(){
+                            notification.style.display="none";
+                            set('movies', movies)
+                        })
+                   }
+            
+                }
         
-        movies = await fetch(`https://localhost:44346/api/Movie`);
-        movies = await movies.json();
-        filterOption = "Alle films"
+        })
 
-        genres= await fetch('https://localhost:44346/api/Movie/genres');
-        genres = await genres.json();
+        }catch{
 
-    });
+            console.log("error bij de api")
+            get('movies')
+            .then(arr=> {
+                var icon = document.getElementById("notificationIcon");
+                notification.style.display="flex";
+
+                if(arr == undefined || arr== null){
+                    console.log("database is leeg")
+                    
+                    document.querySelector(".js-addText").innerHTML = "Er zijn geen films offline opgeslagen :(";
+                    document.getElementById("notificationIcon").src = "./images/crossIcon.svg";
+                    
+                    icon.addEventListener('click', function(){
+                        notification.style.display="none";
+                     })
+
+                }else{
+                    console.log("de database is niet leeg")
+                    movies = arr;
+                    document.querySelector(".js-addText").innerHTML = "Kan geen verbinding maken met de api, offline films worden opgehaald...";
+                    document.getElementById("notificationIcon").src = "./images/crossIcon.svg";
+
+                    icon.addEventListener('click', function(){
+                         notification.style.display="none";
+                     })
+                }
+            })
+        }
+        
+        
+    })
+
     
     async function allMovies (){
         movies = await fetch(`https://localhost:44346/api/Movie`);
@@ -79,17 +170,15 @@
     }
 
     async function moviesGenre (event){
-        console.log("geklikt op genre" + event.detail.genre)
         movies = await fetch(`https://localhost:44346/api/Movie/genres/${event.detail.genre}`)
         movies = await movies.json();
         filterOption = event.detail.genre;
 
     }
 
-
 </script>
 
-<style type="scss">
+<style>
 
 h1{
     text-align: center;

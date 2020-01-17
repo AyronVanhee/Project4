@@ -32,28 +32,28 @@
 		{:else}
 		<img id="imageMenu" class="c-hamburger" on:click={openMenu} src="./images/hamburgerIcon.svg" alt="hamburger Icon"/>
 		<div id="menu" class="c-menu">
-			<div class="c-menuItem" on:click={openMenu} >
+			<div class="c-menuItem js-item" on:click={openMenu} >
 				<a href="/home" >Home</a>
 
 			</div>
-			<div class="c-menuItem" on:click={openMenu}>    
+			<div id="row" class="c-menuItem js-item" on:click={openMenu}>    
 				<a href="/about">About</a>
 			</div>
 			{#if token == undefined}
-				<div class="c-menuItem" on:click={openMenu}>
+				<div class="c-menuItem js-item" on:click={openMenu}>
 					<a href="/login">Login</a>
 				</div>
 			{:else}
 				{#if admin == true}
-					<div class="c-menuItem" on:click={openMenu}>
+					<div class="c-menuItem js-item" on:click={openMenu}>
 						<a href="/admin">Admin</a>
 					</div>
 				{/if}
 						
-				<div class="c-menuItem" on:click={openMenu}>
+				<div class="c-menuItem js-item" on:click={openMenu}>
 					<a href="/reservations">{token.sub}</a>
 				</div>
-				<div class="c-menuItem" on:click={openMenu}>
+				<div class="c-menuItem js-item" on:click={openMenu}>
 					<div on:click={Logout}>Logout</div>
 				</div>	
 			{/if}
@@ -85,8 +85,9 @@
 		token = JwtTokenHelper.checkJwtToken();
 
 		admin = JwtTokenHelper.checkIfAdmin();
-          
-        });
+ 
+    });
+
 
         
     window.addEventListener('resize', function() {
@@ -111,6 +112,7 @@
 		}
 
 	}
+
 
 
 </script>
@@ -197,14 +199,14 @@
 	.c-menu{
 		height:auto;
 		background-color: whitesmoke;
-		position: absolute;
+		position: fixed;
 		width: 100%;
 		transition: all 200ms;
 		z-index: 3;	
 		color:#2d51bd;
-		margin-top:115px;
+		margin-top:75px;
 		left:0;
-
+		top:0;
 	}
 
 	.c-menuItem{

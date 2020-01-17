@@ -82,9 +82,12 @@
 
     import { onMount } from 'svelte';
     import axios from "axios";
+    import { get, set } from 'idb-keyval';
+
 
 
     let movie=[];
+    let movies=[];
     let rooms=[];
     let allSeats=[];
     let occupiedSeats=[];
@@ -100,18 +103,32 @@
 
     token = JwtTokenHelper.checkJwtToken();
 
+    onMount(async () => {   
 
-    onMount(async () => {        
         window.scrollTo({
             top: 0,
             left: 0,
         });
-        movie = await fetch(`https://localhost:44346/api/Movie/${id}`);
-        movie = await movie.json();
+        try{
 
-	    dates = await fetch(`https://localhost:44346/api/Movie/${id}/Dates`);
-        dates = await dates.json();
-          
+            movie = await fetch(`https://localhost:44346/api/Movie/${id}`);
+            movie = await movie.json();
+
+            dates = await fetch(`https://localhost:44346/api/Movie/${id}/Dates`);
+            dates = await dates.json();
+        }catch{
+
+            get('movies')
+            .then(arr => {
+                movies= arr;
+                movies.forEach(function(element){
+                    if(element.movieID == id){
+                        movie= element;
+                    }
+                }
+                )
+        })
+        }         
         });
     
     
@@ -171,11 +188,9 @@
                     
        
 
-
-
 </script>
 
-<style lang="scss">
+<style>
 
 .c-movieInformationGrid{
     display: grid;

@@ -1,0 +1,75 @@
+@import '../settings/global.scss';
+
+.c-loginBox{
+    border: 1px solid $global-white;
+    margin: 0 auto;
+    width: 500px;
+    background-color: $global-white;
+    color: $global-blue;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+    margin-top: 48px;
+    margin-bottom: 16px;
+
+}
+
+.c-loginInformation{
+    padding: 16px;
+}
+
+.c-error{
+    color: $global-red;
+    margin-bottom: 16px;
+}
+
+.c-label{
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.c-input{
+    width:calc(100% - 16px);
+    padding: 8px;
+    border: 1px solid $global-blue;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+
+}
+
+.c-logoBox{
+    background-color: $global-white;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto;
+    border-radius: 16px;
+    margin-top: 32px;
+}
+
+.c-logoImage{
+    width: 100px;
+    height: auto;
+    margin:16px;
+}
+
+@media only screen and (max-width: 550px) {
+    .c-loginBox{
+        margin-top: 0;
+        width: 250px;
+
+}
+
+.c-logoBox{
+    width: 100px;
+    height: 100px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
+.c-logoImage{
+    width: 50px;
+}
+}

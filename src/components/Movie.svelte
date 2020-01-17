@@ -13,8 +13,3 @@
     export let movie;  
 
 </script>
-
-<style type="scss">
-
-
-</style>

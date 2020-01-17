@@ -1,53 +1,41 @@
 <Container>
 
-    <h1>Tickets</h1>
-    
-    {#if reservations.length}
-        <div class="c-movieGrid">
-        {#each  reservations as movie}
-                <Reservation reservation={movie}/>
-        {/each}
-        </div>
-    {:else}
-        <h2>Je hebt nog geen tickets gekocht.</h2>
+  <h1>Tickets</h1>
 
-    {/if}
+  {#if reservations.length}
+    <div class="c-movieGrid">
+      {#each reservations as movie}
+        <Reservation reservation={movie} />
+      {/each}
+    </div>
+  {:else}
+    <h2>Je hebt nog geen tickets gekocht.</h2>
+  {/if}
 
 </Container>
 
 <script>
+  import Container from "../components/layout/Container.svelte";
+  import Reservation from "../components/ReservatedMovie.svelte";
 
-    import Container from "../components/layout/Container.svelte";
-    import Reservation from "../components/ReservatedMovie.svelte";
+  import axios from "axios";
+  import { onMount } from "svelte";
 
-    import JwtTokenHelper from '../modules/JwtToken.js';
+  let reservations = [];
 
-    import axios from "axios";
-    import { onMount } from 'svelte';
+  onMount(async () => {
+    let token = window.localStorage.getItem("JwtToken");
 
-    let reservations=[];
-    let token;
+    axios.defaults.headers.get["Authorization"] = "Bearer " + token;
 
-
-    onMount(async () => {  
-	    token = window.localStorage.getItem("JwtToken");
-
-        axios.defaults.headers.get['Authorization'] = 'Bearer ' + token;
-
-        axios.get('https://localhost:44346/api/User/reservations' )
-        .then(res => {
-            reservations = res.data;
-
-         });
+    axios.get("https://localhost:44346/api/User/reservations").then(res => {
+      reservations = res.data;
     });
+  });
 </script>
 
-<style lang="scss">
-
-h1{
+<style>
+  h1 {
     text-align: center;
-}
-
-
+  }
 </style>
-

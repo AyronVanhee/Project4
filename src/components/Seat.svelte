@@ -97,7 +97,7 @@
 }
 
 .container .checkmark:after {
-      top: 9px;
+      top: 14px;
       left: 9px;
       width: 8px;
       height: 8px;

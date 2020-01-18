@@ -6,7 +6,6 @@
     width: 500px;
     background-color: $global-white;
     color: $global-blue;
-    border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.26);
     margin-top: 48px;
     margin-bottom: 16px;
@@ -24,16 +23,14 @@
 
 .c-label{
     font-size: 20px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
 }
 
 .c-input{
     width:calc(100% - 16px);
     padding: 8px;
     border: 1px solid $global-blue;
-    border-radius: 4px;
     margin-bottom: 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
 
 }
 
@@ -45,8 +42,9 @@
     justify-content: center;
     align-items: center;
     margin:0 auto;
-    border-radius: 16px;
     margin-top: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.26);
+
 }
 
 .c-logoImage{

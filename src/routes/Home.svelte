@@ -34,7 +34,7 @@
 
     </div>
 
-    <div class="c-notification js-notification" id="notification">
+    <div class="c-notification js-notification" id="notification" >
         <div class="js-addText">Sla de films op zodat je deze ook offline kunt raadplegen</div>
         <img id="notificationIcon" class="c-add js-addImage" src="./images/plus.svg" alt="icon"/>
     </div>

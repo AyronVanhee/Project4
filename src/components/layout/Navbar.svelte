@@ -126,12 +126,13 @@
 		left: 0;
 		width: calc(100% - 128px);
 		display: flex;
-		color: white;
+		color: #4169e1;
 		height: 75px;
 		align-items: center;
 		transition: all 200ms;
 		z-index: 1;
 		padding: 0 64px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.26);
 
 	}
 
@@ -151,9 +152,9 @@
 	.c-login{
 		margin: 0 auto;
 		margin-right: 16px;
-		width: 200px;
 		overflow: hidden;
 		text-align: right;
+
 	}
 
 	.c-logout{

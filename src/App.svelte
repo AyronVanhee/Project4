@@ -1,4 +1,4 @@
-<span id="app">
+
   <Navbar />
 
   <main id="main">
@@ -6,7 +6,7 @@
   </main>
 
   <Footer />
-</span>
+
 
 <script>
   import Home from "./routes/Home.svelte";

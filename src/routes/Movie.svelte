@@ -13,6 +13,7 @@
   import { get, set } from "idb-keyval";
 
   let movie = [];
+  let movies= [];
   let dates = [];
   let rooms = [];
   let allSeats = [];

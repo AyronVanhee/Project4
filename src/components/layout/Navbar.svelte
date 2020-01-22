@@ -1,6 +1,6 @@
 <nav id="navbar">
 
-		{#if screenWidht>700}
+		<div class="c-navBig">
 			<img class="c-logo" id="logo" src="images/logo.png" alt="logo"/>
 
 			<div class="c-navItem">
@@ -29,8 +29,9 @@
 					<div on:click={Logout}>Logout</div>
 				</div>	
 			{/if}
-		{:else}
-		<img id="imageMenu" class="c-hamburger" on:click={openMenu} src="./images/hamburgerIcon.svg" alt="hamburger Icon"/>
+		</div>
+		<div class="c-navSmall">
+			<img id="imageMenu" class="c-hamburger" on:click={openMenu} src="./images/hamburgerIcon.svg" alt="hamburger Icon"/>
 		<div id="menu" class="c-menu">
 			<div class="c-menuItem js-item" on:click={openMenu} >
 				<a href="/home" >Home</a>
@@ -62,11 +63,9 @@
 		
 		<img class="c-logo" id="logo" src="images/logo.png" alt="logo"/>
 
-		{/if}
+		</div>
 		
 </nav>
-
-
 
 <script>
 
@@ -77,8 +76,6 @@
 
 	let token;
 	let admin=false;
-	let screenWidht= screen.width;
-
 
 	onMount(async () => {        
         //kijken naar een jwttoken
@@ -89,11 +86,6 @@
     });
 
 
-        
-    window.addEventListener('resize', function() {
-		screenWidht = screen.width;
-	});
-	
 	function Logout(){
 		JwtTokenHelper.logout();
 	}
@@ -113,12 +105,21 @@
 
 	}
 
-
-
 </script>
 
 
 <style lang="scss">
+
+	.c-navBig{
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+
+	.c-navSmall{
+		display: none;
+	}
+
 	nav{
 		background-color:white;
 		position: fixed;
@@ -177,6 +178,15 @@
 }
 
 @media only screen and (max-width: 700px) {
+
+	.c-navSmall{
+		display: flex;
+		width:100%;
+	}
+	.c-navBig{
+		display: none;
+	}
+
 	nav{
 		width: calc(100% - 32px);
 		padding: 0 16px;
@@ -185,8 +195,7 @@
 	.c-logo{
 		height: 40px;
 		margin: 0 auto;
-		margin-right: 16px;
-
+		margin-right:0;
 	}
 
 	.c-navItem{
